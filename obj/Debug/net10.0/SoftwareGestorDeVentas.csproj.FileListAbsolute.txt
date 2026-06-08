@@ -1,0 +1,14 @@
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\bin\Debug\net10.0\SoftwareGestorDeVentas.exe
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\bin\Debug\net10.0\SoftwareGestorDeVentas.deps.json
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\bin\Debug\net10.0\SoftwareGestorDeVentas.runtimeconfig.json
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\bin\Debug\net10.0\SoftwareGestorDeVentas.dll
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\bin\Debug\net10.0\SoftwareGestorDeVentas.pdb
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.AssemblyInfoInputs.cache
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.AssemblyInfo.cs
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.csproj.CoreCompileInputs.cache
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.dll
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\refint\SoftwareGestorDeVentas.dll
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.pdb
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\SoftwareGestorDeVentas.genruntimeconfig.cache
+C:\Users\Ingenieria\Desktop\problemas_T2\SoftwareGestorDeVentas\obj\Debug\net10.0\ref\SoftwareGestorDeVentas.dll
