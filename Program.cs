@@ -15,7 +15,6 @@
             Console.WriteLine("8. Reporte de ventas");
             Console.WriteLine("9. Salir");
 
-            int opcion = 0;
             
             Console.WriteLine("");
             Console.Write("Ingresa el índice de lo que deseas hacer: ");
@@ -23,27 +22,38 @@
 
             switch (opcion)
             {
-                case 1: RegistrarVenta.RegistroDeVenta();
+                    case 1:
                     break;
-                case 2: MostrarVenta.VerVenta(); 
+                    case 2:
+                        MostrarVenta.VerVenta();
                     break;
-                case 3: BuscarVenta.BusquedaDeVenta();
+                    case 3:
+                        BuscarVenta.BusquedaDeVenta();
                     break;
-                case 4: ActualizarEstado.ActualizacionDeEstado();
+                    case 4:
+                        ActualizarEstado.ActualizacionDeEstado();
                     break;
-                case 5: CarritoDeCompras.MostrarCarrito();
+                    case 5:
+                        CarritoDeCompras.MostrarCarrito();
                     break;
-                case 6: SimularCaja.SimulacionDeCaja();
+                    case 6:
+                        SimularCaja.SimulacionDeCaja();
                     break;
-                case 7: GestionDeClientes.GestioanrClientes();
+                    case 7:
+                        GestionDeClientes.GestioanrClientes();
                     break;
-                case 8: ReporteDeVentas.ReportarVentas();
+                    case 8:
+                        ReporteDeVentas.ReportarVentas();
                     break;
                 default: 
                     Console.WriteLine("El programa se cerró con éxito");
                     break;
             
             }
+            } while (opcion != 9);
+            Console.WriteLine("Programa Finalizado...");
+
+            
         }
     }
 }
