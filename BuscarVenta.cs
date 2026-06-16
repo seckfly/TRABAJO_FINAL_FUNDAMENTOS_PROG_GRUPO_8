@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using System.Collections.Generic;
+using System.Text;
+using System;
 
 namespace SoftwareGestorDeVentas
 {
@@ -6,39 +9,32 @@ namespace SoftwareGestorDeVentas
     {
         public static void BusquedaDeVenta()
         {
-            Console.WriteLine("\n===== BUSCAR VENTA =====");
-
-            if (RegistrarVenta.contador_de_pedidos == 0)
-            {
-                Console.WriteLine("No existen pedidos registrados.");
-                return;
-            }
-
-            Console.Write("Ingrese el nombre del cliente: ");
-            string nombre = Console.ReadLine().Trim();
+            Console.Write("Ingrese código, cliente o producto a buscar: ");
+            string busqueda = Console.ReadLine().ToLower();
 
             bool encontrado = false;
 
-            for (int i = 0; i < RegistrarVenta.contador_de_pedidos; i++)
+            foreach (Venta venta in RegistrarVenta.ventas)
             {
-                if (RegistrarVenta.arreglo_de_clientes[i].ToLower().Contains(nombre.ToLower()))
+                if (venta.Codigo.ToLower().Contains(busqueda) ||
+                    venta.Cliente.ToLower().Contains(busqueda) ||
+                    venta.Producto.ToLower().Contains(busqueda))
                 {
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine("Cliente : " + RegistrarVenta.arreglo_de_clientes[i]);
-                    Console.WriteLine("Producto: " + RegistrarVenta.arreglo_de_productos[i]);
-                    Console.WriteLine("Cantidad: " + RegistrarVenta.arreglo_de_cantidades[i]);
-                    Console.WriteLine("Precio  : S/ " + RegistrarVenta.arreglo_de_precios[i]);
-                    Console.WriteLine("Total   : S/ " + RegistrarVenta.arreglo_de_totales[i]);
-                    Console.WriteLine("Estado  : " + RegistrarVenta.arreglo_de_estados[i]);
-                    Console.WriteLine("--------------------------------");
-
+                    Console.WriteLine("\n***** VENTA ENCONTRADA *****");
+                    Console.WriteLine("Código: " + venta.Codigo);
+                    Console.WriteLine("Cliente: " + venta.Cliente);
+                    Console.WriteLine("Producto: " + venta.Producto);
+                    Console.WriteLine("Cantidad: " + venta.Cantidad);
+                    Console.WriteLine("Precio Unitario: " + venta.Precio);
+                    Console.WriteLine("Total: " + venta.Total);
+                    Console.WriteLine("Estado: " + venta.Estado);
                     encontrado = true;
                 }
             }
 
             if (!encontrado)
             {
-                Console.WriteLine("No se encontró ninguna venta.");
+                Console.WriteLine("No se encontraron ventas con ese dato.");
             }
         }
     }
