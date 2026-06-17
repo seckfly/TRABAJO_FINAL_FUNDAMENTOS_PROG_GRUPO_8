@@ -1,4 +1,4 @@
-Ôªønamespace SoftwareGestorDeVentas
+namespace SoftwareGestorDeVentas
 {
     internal class Program
     {
@@ -14,14 +14,14 @@
                 Console.WriteLine("4. Actualizar estado");
                 Console.WriteLine("5. Carrito de compras");
                 Console.WriteLine("6. Simular caja");
-                Console.WriteLine("7. Gesti√≥n de clientes");
+                Console.WriteLine("7. GestiÛn de clientes");
                 Console.WriteLine("8. Reporte de ventas");
                 Console.WriteLine("9. Salir");
 
 
                 Console.WriteLine("");
-                Console.Write("Ingresa el √≠ndice de lo que deseas hacer: ");
-                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 9) Console.Write("Entrada inv√°lida. Ingrese una opci√≥n v√°lida: ");
+                Console.Write("Ingresa el Ìndice de lo que deseas hacer: ");
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 9) Console.Write("Entrada inv·lida. Ingrese una opciÛn v·lida: ");
 
                 switch (opcion)
                 {
@@ -44,13 +44,13 @@
                         SimularCaja.SimulacionDeCaja();
                         break;
                     case 7:
-                        GestionDeClientes.GestioanrClientes();
+                        GestionDeClientes.GestionarClientes();
                         break;
                     case 8:
                         ReporteDeVentas.ReportarVentas();
                         break;
                     default:
-                        Console.WriteLine("El programa se cerr√≥ con √©xito");
+                        Console.WriteLine("El programa se cerrÛ con Èxito");
                         break;
 
                 }
