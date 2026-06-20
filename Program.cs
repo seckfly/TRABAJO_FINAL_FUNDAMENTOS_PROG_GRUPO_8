@@ -1,3 +1,5 @@
+Ôªøusing System;
+
 namespace SoftwareGestorDeVentas
 {
     internal class Program
@@ -5,59 +7,60 @@ namespace SoftwareGestorDeVentas
         static void Main(string[] args)
         {
             int opcion = 0;
-            do 
+
+            do
             {
                 Console.WriteLine("----- GESTOR DE VENTAS -----");
                 Console.WriteLine("1. Registrar venta");
                 Console.WriteLine("2. Mostrar venta");
                 Console.WriteLine("3. Buscar venta");
                 Console.WriteLine("4. Actualizar estado");
-                Console.WriteLine("5. Carrito de compras");
-                Console.WriteLine("6. Simular caja");
-                Console.WriteLine("7. GestiÛn de clientes");
-                Console.WriteLine("8. Reporte de ventas");
-                Console.WriteLine("9. Salir");
-
-
+                Console.WriteLine("5. Simular caja");
+                Console.WriteLine("6. Reporte de ventas");
+                Console.WriteLine("7. Salir");
                 Console.WriteLine("");
-                Console.Write("Ingresa el Ìndice de lo que deseas hacer: ");
-                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 9) Console.Write("Entrada inv·lida. Ingrese una opciÛn v·lida: ");
+
+                Console.Write("Ingresa el √≠ndice de lo que deseas hacer: ");
+
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 7)
+                {
+                    Console.Write("Entrada inv√°lida. Ingrese una opci√≥n v√°lida: ");
+                }
 
                 switch (opcion)
                 {
                     case 1:
                         RegistrarVenta.RegistroDeVenta();
                         break;
+
                     case 2:
                         MostrarVenta.VerVenta();
                         break;
+
                     case 3:
                         BuscarVenta.BusquedaDeVenta();
                         break;
+
                     case 4:
                         ActualizarEstado.ActualizacionDeEstado();
                         break;
+
                     case 5:
-                        CarritoDeCompras.MostrarCarrito();
-                        break;
-                    case 6:
                         SimularCaja.SimulacionDeCaja();
                         break;
-                    case 7:
-                        GestionDeClientes.GestionarClientes();
-                        break;
-                    case 8:
+
+                    case 6:
                         ReporteDeVentas.ReportarVentas();
                         break;
-                    default:
-                        Console.WriteLine("El programa se cerrÛ con Èxito");
+
+                    case 7:
+                        Console.WriteLine("El programa se cerr√≥ con √©xito");
                         break;
-
                 }
-            } while (opcion != 9);
-            Console.WriteLine("Programa Finalizado...");
 
-            
+            } while (opcion != 7);
+
+            Console.WriteLine("Programa Finalizado...");
         }
     }
 }
