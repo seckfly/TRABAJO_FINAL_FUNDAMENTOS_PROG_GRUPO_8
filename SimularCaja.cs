@@ -1,4 +1,5 @@
-using System;
+ï»¿using System;
+using System.Collections.Generic;
 
 namespace SoftwareGestorDeVentas
 {
@@ -19,57 +20,79 @@ namespace SoftwareGestorDeVentas
             double totalCancelado = 0;
             double dineroRecibido = 0;
 
-            int cantidadVentas = 0;
+            int cantidadBoletas = 0;
+            List<string> codigosMostrados = new List<string>();
 
-            Console.WriteLine("***** SIMULACIÓN DE CAJA *****");
+            Console.WriteLine("***** SIMULACIÃ“N DE CAJA *****");
 
             foreach (Venta venta in RegistrarVenta.ventas)
             {
-                cantidadVentas++;
-                totalGeneral += venta.Total;
-
-                Console.WriteLine("------------------------------");
-                Console.WriteLine($"Código: {venta.Codigo}");
-                Console.WriteLine($"Cliente: {venta.Cliente}");
-                Console.WriteLine($"Producto: {venta.Producto}");
-                Console.WriteLine($"Total: {venta.Total}");
-                Console.WriteLine($"Estado: {venta.Estado}");
-
-                switch (venta.Estado)
+                if (!codigosMostrados.Contains(venta.Codigo))
                 {
-                    case "PENDIENTE":
-                        totalPendiente += venta.Total;
-                        break;
+                    codigosMostrados.Add(venta.Codigo);
+                    cantidadBoletas++;
 
-                    case "PAGADO":
-                        totalPagado += venta.Total;
-                        dineroRecibido += venta.Total;
-                        break;
+                    double totalBoleta = 0;
+                    string cliente = venta.Cliente;
+                    string estadoBoleta = venta.Estado;
 
-                    case "ENTREGADO":
-                        totalEntregado += venta.Total;
-                        dineroRecibido += venta.Total;
-                        break;
+                    Console.WriteLine("----------------------------------------");
+                    Console.WriteLine("CÃ³digo : " + venta.Codigo);
+                    Console.WriteLine("Cliente: " + cliente);
+                    Console.WriteLine("Estado : " + estadoBoleta);
+                    Console.WriteLine();
+                    Console.WriteLine("Productos:");
 
-                    case "CANCELADO":
-                        totalCancelado += venta.Total;
-                        break;
+                    foreach (Venta detalle in RegistrarVenta.ventas)
+                    {
+                        if (detalle.Codigo == venta.Codigo)
+                        {
+                            Console.WriteLine("- " + detalle.Producto + " | Cantidad: " + detalle.Cantidad + " | Subtotal: S/ " + detalle.Total.ToString("0.00"));
+                            totalBoleta += detalle.Total;
+                        }
+                    }
 
-                    default:
-                        Console.WriteLine("Estado no reconocido.");
-                        break;
+                    Console.WriteLine();
+                    Console.WriteLine("Total de boleta: S/ " + totalBoleta.ToString("0.00"));
+
+                    totalGeneral += totalBoleta;
+
+                    switch (estadoBoleta)
+                    {
+                        case "PENDIENTE":
+                            totalPendiente += totalBoleta;
+                            break;
+
+                        case "PAGADO":
+                            totalPagado += totalBoleta;
+                            dineroRecibido += totalBoleta;
+                            break;
+
+                        case "ENTREGADO":
+                            totalEntregado += totalBoleta;
+                            dineroRecibido += totalBoleta;
+                            break;
+
+                        case "CANCELADO":
+                            totalCancelado += totalBoleta;
+                            break;
+
+                        default:
+                            Console.WriteLine("Estado no reconocido.");
+                            break;
+                    }
                 }
             }
 
-            Console.WriteLine("------------------------------");
+            Console.WriteLine("----------------------------------------");
             Console.WriteLine("RESUMEN DE CAJA");
-            Console.WriteLine($"Cantidad de ventas registradas: {cantidadVentas}");
-            Console.WriteLine($"Total general de ventas: {totalGeneral}");
-            Console.WriteLine($"Total pendiente: {totalPendiente}");
-            Console.WriteLine($"Total pagado: {totalPagado}");
-            Console.WriteLine($"Total entregado: {totalEntregado}");
-            Console.WriteLine($"Total cancelado: {totalCancelado}");
-            Console.WriteLine($"Dinero recibido en caja: {dineroRecibido}");
+            Console.WriteLine("Cantidad de boletas registradas: " + cantidadBoletas);
+            Console.WriteLine("Total general de ventas: S/ " + totalGeneral.ToString("0.00"));
+            Console.WriteLine("Total pendiente: S/ " + totalPendiente.ToString("0.00"));
+            Console.WriteLine("Total pagado: S/ " + totalPagado.ToString("0.00"));
+            Console.WriteLine("Total entregado: S/ " + totalEntregado.ToString("0.00"));
+            Console.WriteLine("Total cancelado: S/ " + totalCancelado.ToString("0.00"));
+            Console.WriteLine("Dinero recibido en caja: S/ " + dineroRecibido.ToString("0.00"));
             Console.WriteLine("******************************");
         }
     }
