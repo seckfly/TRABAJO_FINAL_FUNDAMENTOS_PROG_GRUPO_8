@@ -17,12 +17,13 @@ namespace SoftwareGestorDeVentas
                 Console.WriteLine("4. Actualizar estado");
                 Console.WriteLine("5. Simular caja");
                 Console.WriteLine("6. Reporte de ventas");
-                Console.WriteLine("7. Salir");
+                Console.WriteLine("7. Gestión de inventario");
+                Console.WriteLine("8. Salir");
                 Console.WriteLine("");
 
                 Console.Write("Ingresa el índice de lo que deseas hacer: ");
 
-                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 7)
+                while (!int.TryParse(Console.ReadLine(), out opcion) || opcion < 1 || opcion > 8)
                 {
                     Console.Write("Entrada inválida. Ingrese una opción válida: ");
                 }
@@ -54,11 +55,15 @@ namespace SoftwareGestorDeVentas
                         break;
 
                     case 7:
+                        GestionInventario.GestionarInventario();
+                        break;
+
+                    case 8:
                         Console.WriteLine("El programa se cerró con éxito");
                         break;
                 }
 
-            } while (opcion != 7);
+            } while (opcion != 8);
 
             Console.WriteLine("Programa Finalizado...");
         }

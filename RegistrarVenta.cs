@@ -11,73 +11,83 @@ namespace SoftwareGestorDeVentas
         public static void RegistroDeVenta()
         {
             string persona;
-            string producto;
-            int cantidad = 0;
-            double precioUnitario = 0;
-            double total = 0;
-            double totalBoleta = 0;
             string opcion;
             string codigoVenta;
+            double totalBoleta = 0;
 
             codigoVenta = "V" + contadorVentas.ToString("0000");
             contadorVentas++;
 
-            Console.WriteLine("Ingresa tu nombre y apellidos");
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("          REGISTRO DE NUEVA VENTA");
+            Console.WriteLine("========================================");
+            Console.Write("Cliente: ");
             persona = Console.ReadLine();
 
             while (persona == "")
             {
-                Console.WriteLine("Por favor, ingresa tu nombre y apellido");
+                Console.Write("Por favor, ingresa un cliente válido: ");
                 persona = Console.ReadLine();
             }
 
             do
             {
-                Console.WriteLine("Ingresa el nombre del producto: ");
-                producto = Console.ReadLine();
+                Producto productoSeleccionado = GestionInventario.SeleccionarProductoParaVenta();
 
-                while (producto == "")
+                if (productoSeleccionado == null)
                 {
-                    Console.WriteLine("Por favor, ingresa el nombre del producto: ");
-                    producto = Console.ReadLine();
+                    Console.WriteLine("No se agregó ningún producto a la boleta.");
+                }
+                else if (productoSeleccionado.Stock == 0)
+                {
+                    Console.WriteLine("El producto seleccionado no tiene stock disponible.");
+                    Console.WriteLine("No se agregó ningún producto a la boleta.");
+                }
+                else
+                {
+                    int cantidad = 0;
+
+                    Console.WriteLine();
+                    Console.WriteLine("Producto seleccionado: " + productoSeleccionado.Nombre);
+                    Console.WriteLine("Precio unitario: S/ " + productoSeleccionado.Precio.ToString("0.00"));
+                    Console.WriteLine("Stock disponible: " + productoSeleccionado.Stock);
+                    Console.Write("Ingresa la cantidad que deseas vender: ");
+
+                    while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0 || cantidad > productoSeleccionado.Stock)
+                    {
+                        Console.Write("Cantidad inválida. Ingrese una cantidad mayor a 0 y menor o igual al stock disponible: ");
+                    }
+
+                    double total = productoSeleccionado.Precio * cantidad;
+                    totalBoleta += total;
+
+                    productoSeleccionado.Stock -= cantidad;
+
+                    Venta nuevaVenta = new Venta();
+                    nuevaVenta.Codigo = codigoVenta;
+                    nuevaVenta.Cliente = persona;
+                    nuevaVenta.Producto = productoSeleccionado.Nombre;
+                    nuevaVenta.Cantidad = cantidad;
+                    nuevaVenta.Precio = productoSeleccionado.Precio;
+                    nuevaVenta.Total = total;
+                    nuevaVenta.Estado = "PENDIENTE";
+
+                    ventas.Add(nuevaVenta);
+
+                    Console.WriteLine();
+                    Console.WriteLine("========================================");
+                    Console.WriteLine("   PRODUCTO AGREGADO A LA BOLETA " + codigoVenta);
+                    Console.WriteLine("========================================");
+                    Console.WriteLine("Producto        : " + productoSeleccionado.Nombre);
+                    Console.WriteLine("Cantidad        : " + cantidad);
+                    Console.WriteLine("Precio unitario : S/ " + productoSeleccionado.Precio.ToString("0.00"));
+                    Console.WriteLine("Subtotal        : S/ " + total.ToString("0.00"));
+                    Console.WriteLine("Stock restante  : " + productoSeleccionado.Stock);
+                    Console.WriteLine("========================================");
+                    Console.WriteLine();
                 }
 
-                Console.WriteLine("Ingresa la cantidad que deseas: ");
-                while (!int.TryParse(Console.ReadLine(), out cantidad) || cantidad <= 0)
-                {
-                    Console.WriteLine("Ingresa un número entero mayor a 0.");
-                }
-
-                Console.WriteLine("Ingresa su precio unitario");
-                while (!double.TryParse(Console.ReadLine(), out precioUnitario) || precioUnitario <= 0)
-                {
-                    Console.WriteLine("Por favor, el precio unitario debe ser un número mayor a 0");
-                }
-
-                total = precioUnitario * cantidad;
-                totalBoleta += total;
-
-                Venta nuevaVenta = new Venta();
-                nuevaVenta.Codigo = codigoVenta;
-                nuevaVenta.Cliente = persona;
-                nuevaVenta.Producto = producto;
-                nuevaVenta.Cantidad = cantidad;
-                nuevaVenta.Precio = precioUnitario;
-                nuevaVenta.Total = total;
-                nuevaVenta.Estado = "PENDIENTE";
-
-                ventas.Add(nuevaVenta);
-
-                Console.WriteLine();
-                Console.WriteLine("========================================");
-                Console.WriteLine("   PRODUCTO AGREGADO A LA BOLETA " + codigoVenta);
-                Console.WriteLine("========================================");
-                Console.WriteLine("Producto        : " + producto);
-                Console.WriteLine("Cantidad        : " + cantidad);
-                Console.WriteLine("Precio unitario : S/ " + precioUnitario.ToString("0.00"));
-                Console.WriteLine("Subtotal        : S/ " + total.ToString("0.00"));
-                Console.WriteLine("========================================");
-                Console.WriteLine();
                 do
                 {
                     Console.WriteLine("¿Deseas registrar otro producto en la misma boleta? (SI/NO)");
@@ -86,12 +96,20 @@ namespace SoftwareGestorDeVentas
 
             } while (opcion == "SI");
 
-            Console.WriteLine("****** Boleta ******");
-            Console.WriteLine("*** N° " + codigoVenta);
-            Console.WriteLine("Cliente: " + persona);
-            Console.WriteLine("Total de la boleta: " + totalBoleta);
-            Console.WriteLine("Estado: PENDIENTE");
-            Console.WriteLine("********************");
+            if (totalBoleta > 0)
+            {
+                Console.WriteLine("****** Boleta ******");
+                Console.WriteLine("*** N° " + codigoVenta);
+                Console.WriteLine("Cliente: " + persona);
+                Console.WriteLine("Total de la boleta: S/ " + totalBoleta.ToString("0.00"));
+                Console.WriteLine("Estado: PENDIENTE");
+                Console.WriteLine("********************");
+            }
+            else
+            {
+                Console.WriteLine("No se registró ningún producto en la boleta.");
+            }
         }
     }
 }
+
