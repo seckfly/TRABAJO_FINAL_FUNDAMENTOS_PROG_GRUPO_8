@@ -68,12 +68,16 @@ namespace SoftwareGestorDeVentas
 
                 ventas.Add(nuevaVenta);
 
-                Console.WriteLine("Producto agregado a la boleta " + codigoVenta);
-                Console.WriteLine("Producto: " + producto);
-                Console.WriteLine("Cantidad: " + cantidad);
-                Console.WriteLine("Precio Unitario: " + precioUnitario);
-                Console.WriteLine("Subtotal: " + total);
-
+                Console.WriteLine();
+                Console.WriteLine("========================================");
+                Console.WriteLine("   PRODUCTO AGREGADO A LA BOLETA " + codigoVenta);
+                Console.WriteLine("========================================");
+                Console.WriteLine("Producto        : " + producto);
+                Console.WriteLine("Cantidad        : " + cantidad);
+                Console.WriteLine("Precio unitario : S/ " + precioUnitario.ToString("0.00"));
+                Console.WriteLine("Subtotal        : S/ " + total.ToString("0.00"));
+                Console.WriteLine("========================================");
+                Console.WriteLine();
                 do
                 {
                     Console.WriteLine("¿Deseas registrar otro producto en la misma boleta? (SI/NO)");
