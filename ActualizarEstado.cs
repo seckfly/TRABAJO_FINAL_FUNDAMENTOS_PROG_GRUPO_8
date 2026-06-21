@@ -59,6 +59,15 @@ namespace SoftwareGestorDeVentas
                 return;
             }
 
+            if (estadoActual == "CANCELADO")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Esta boleta ya fue cancelada.");
+                Console.WriteLine("No se puede modificar el estado de una boleta cancelada.");
+                Console.WriteLine("Si desea vender nuevamente, registre una nueva venta.");
+                return;
+            }
+
             Console.WriteLine("Total de boleta : S/ " + totalBoleta.ToString("0.00"));
             Console.WriteLine("========================================");
 
@@ -67,7 +76,7 @@ namespace SoftwareGestorDeVentas
             Console.WriteLine("1. PENDIENTE");
             Console.WriteLine("2. PAGADO");
             Console.WriteLine("3. ENTREGADO");
-            Console.WriteLine("4. CANCELADO");
+            Console.WriteLine("4. CANCELADO / ANULAR BOLETA");
 
             Console.Write("Seleccione el nuevo estado: ");
             string opcion = Console.ReadLine() ?? "";
@@ -93,6 +102,37 @@ namespace SoftwareGestorDeVentas
                     return;
             }
 
+            if (nuevoEstado == "CANCELADO")
+            {
+                Console.WriteLine();
+                Console.WriteLine("Está a punto de anular la boleta " + codigoBuscado + ".");
+                Console.WriteLine("Esta acción devolverá el stock de los productos al inventario.");
+                Console.Write("¿Desea continuar? (SI/NO): ");
+
+                string confirmacion = (Console.ReadLine() ?? "").ToUpper();
+
+                if (confirmacion != "SI")
+                {
+                    Console.WriteLine("Anulación cancelada. No se modificó la boleta.");
+                    return;
+                }
+
+                foreach (Venta venta in RegistrarVenta.ventas)
+                {
+                    if ((venta.Codigo ?? "").ToUpper() == codigoBuscado)
+                    {
+                        foreach (Producto producto in GestionInventario.productos)
+                        {
+                            if (producto.Nombre == venta.Producto)
+                            {
+                                producto.Stock += venta.Cantidad;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             foreach (Venta venta in RegistrarVenta.ventas)
             {
                 if ((venta.Codigo ?? "").ToUpper() == codigoBuscado)
@@ -106,6 +146,12 @@ namespace SoftwareGestorDeVentas
             Console.WriteLine(" Estado actualizado correctamente");
             Console.WriteLine(" Código : " + codigoBuscado);
             Console.WriteLine(" Estado : " + nuevoEstado);
+
+            if (nuevoEstado == "CANCELADO")
+            {
+                Console.WriteLine(" Stock devuelto al inventario");
+            }
+
             Console.WriteLine("========================================");
         }
     }
